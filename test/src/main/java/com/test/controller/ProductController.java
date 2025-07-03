@@ -18,9 +18,4 @@ public class ProductController {
         model.addAttribute("products", productService.getAll());
         return "productList";
     }
-    
-    @GetMapping("/test")
-    public String test() {
-        return "redirect:/products";
-    }
 }

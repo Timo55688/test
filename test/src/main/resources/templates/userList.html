@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>使用者清單</title>
+</head>
+<body>
+<h2>使用者清單</h2>
+
+<div th:if="${error}">
+    <p style="color:red;" th:text="${error}"></p>
+</div>
+
+<table border="1" th:if="${users}">
+    <thead>
+    <tr>
+        <th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.gender}"></td>
+        <td th:text="${user.status}"></td>
+    </tr>
+    </tbody>
+</table>
+<h3>分頁資訊</h3>
+<div th:if="${pagination}">
+    <p>
+        第 <span th:text="${pagination.page}"></span> 頁 /
+        共 <span th:text="${pagination.pages}"></span> 頁，
+        共 <span th:text="${pagination.total}"></span> 筆，
+        每頁 <span th:text="${pagination.limit}"></span> 筆
+    </p>
+</div>
+</body>
+</html>
