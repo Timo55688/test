@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>線上水果訂購</title>
+</head>
+<body>
+<h1>線上訂購水果</h1>
+
+<p th:if="${message}" th:text="${message}"></p>
+
+<form th:action="@{/order/submit}" method="post">
+    姓名：<input type="text" name="customerName" required><br><br>
+
+    <table border="1">
+        <tr>
+            <th>商品名稱</th>
+            <th>價格</th>
+            <th>庫存</th>
+            <th>購買數量 (最多10)</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.stock}"></td>
+            <td>
+                <input type="number"
+                       min="0" max="10" value="0"
+                       th:name="'quantities[' + ${product.id} + ']'">
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <button type="submit">送出訂單</button>
+</form>
+</body>
+</html>
