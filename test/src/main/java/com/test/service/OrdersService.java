@@ -39,7 +39,7 @@ public class OrdersService {
 			int qty = quantities.getOrDefault(product.getId(), 0);
 			if (qty > 0) {
 				if (qty > product.getStock()) {
-					error.append(product.getName()).append("（庫存不足，剩餘").append(product.getStock()).append("）<br>");
+					error.append(product.getName()).append("（庫存不足，剩餘").append(product.getStock()).append("）\n");
 					continue;
 				}
 
@@ -69,7 +69,7 @@ public class OrdersService {
 			order.setProductDetail(error.toString());
 			order.setTotalPrice(0);
 			orderRepository.save(order);
-			return new OrderResultDTO(false, customerName + "您好，以下商品庫存不足：<br>" + error);
+			return new OrderResultDTO(false, customerName + "您好，以下商品庫存不足：\n" + error);
 		}
 
 		if (detail.length() > 0) {

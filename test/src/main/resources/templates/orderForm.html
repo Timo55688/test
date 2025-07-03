@@ -7,7 +7,7 @@
 <body>
 <h1>線上訂購水果</h1>
 
-<p th:if="${message}" th:utext="${message}"></p>
+<pre th:if="${message}" th:text="${message}"></pre>
 
 <form th:action="@{/order/submit}" method="post">
     姓名：<input type="text" name="customerName" required><br><br>
@@ -33,6 +33,10 @@
 
     <br>
     <button type="submit">送出訂單</button>
+	<button type="reset">清除重填</button>
+	<a th:href="@{/order/form}">
+	    <button type="button">回到訂購表單</button>
+	</a>
 </form>
 </body>
 </html>

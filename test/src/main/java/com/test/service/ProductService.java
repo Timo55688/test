@@ -19,22 +19,31 @@ public class ProductService {
     }
 
     public Product getById(Integer id) {
-        return productRepo.findById(id).orElse(null);
+        Product product = productRepo.findById(id).orElse(null);
+        if (product == null) {
+        	throw new IllegalArgumentException("找不到編號為：" + id + "的商品");
+        }
+    	return product;
     }
     
     public void createProduct(Product product) {
-        product.setId(null);
+    	Product existing = productRepo.findByName(product.getName()).orElse(null);
+        if (existing != null) {
+            throw new IllegalArgumentException("商品名稱已存在：" + product.getName());
+        }
+    	product.setId(null);
         productRepo.save(product);
     }
 
     public void updateProduct(Integer id, Product updatedProduct) {
-        Product existing = productRepo.findById(id).orElse(null);
-        if (existing != null) {
-            existing.setName(updatedProduct.getName());
-            existing.setPrice(updatedProduct.getPrice());
-            existing.setStock(updatedProduct.getStock());
-            productRepo.save(existing);
+        Product product = productRepo.findById(id).orElse(null);
+        if (product == null) {
+            throw new IllegalArgumentException("找不到編號為：" + id + "的商品");
         }
+        product.setName(updatedProduct.getName());
+        product.setPrice(updatedProduct.getPrice());
+        product.setStock(updatedProduct.getStock());
+        productRepo.save(product);
     }
     
     public void delete(Integer id) {
