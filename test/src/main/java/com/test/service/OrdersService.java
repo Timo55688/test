@@ -17,6 +17,7 @@ import com.test.repository.ProductRepository;
 @Service
 public class OrdersService {
 
+
     @Autowired
     private ProductService productService;
 
@@ -86,5 +87,6 @@ public class OrdersService {
 
         return new OrderResultDTO(true, customerName + "您好，您總共購買" + detail + "，總計" + total + "元");
     }
+
 }
 
